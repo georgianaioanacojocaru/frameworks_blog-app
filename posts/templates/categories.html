@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block csslink %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+{% endblock csslink %}
+{% block title %} {{title}} {% endblock title %}
+
+{% block body %}
+<section id='sec'>
+    <div class="container">
+        {% for post in posts %}
+        <article class="post">
+            <img src="/media/{{post.image}}" alt="">
+            <div>
+                <span><b style='font-size:14px;'> {{post.created_by.username}} </b><span style='font-size:12px;'>in </span><b
+                        style='font-size:14px;'>{{post.category}}</b></span>
+            </div>
+            <h6>{{post.title|safe}}</h6>
+            <p>{{post.content|truncatewords_html:20|safe}}</p>
+            <p><a href="{% url 'template_view' post.id %}">Read more . </a><span>4 min read</span></p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+
+<div class="container-box1">
+    <section id='sec1'>
+    </section>
+</div>
+
+
+<div class="btn1">
+    <button id="bt">Load More</button>
+</div>
+{% endblock body %}
+
+{% block jslink %}
+<script src="{% static 'js/categories.js' %}"></script>{% endblock jslink %}
